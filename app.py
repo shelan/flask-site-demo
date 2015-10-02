@@ -1,6 +1,7 @@
 #----------------------------------------------------------------------------#
 # Imports
 #----------------------------------------------------------------------------#
+import os
 
 from flask import Flask, render_template, request
 # from flask.ext.sqlalchemy import SQLAlchemy
@@ -50,16 +51,19 @@ def about():
     return render_template('pages/placeholder.about.html')
 
 
+@app.route('/register')
+def register():
+    form = RegisterForm(request.form)
+    return render_template('forms/register.html', form=form)
+
 @app.route('/login')
 def login():
     form = LoginForm(request.form)
     return render_template('forms/login.html', form=form)
 
-
-@app.route('/register')
-def register():
-    form = RegisterForm(request.form)
-    return render_template('forms/register.html', form=form)
+@app.route('/event')
+def events():
+    return render_template('pages/placeholder.events.html')
 
 
 @app.route('/forgot')
@@ -95,12 +99,11 @@ if not app.debug:
 #----------------------------------------------------------------------------#
 
 # Default port:
-if __name__ == '__main__':
-    app.run()
+# if __name__ == '__main__':
+#     app.run()
 
 # Or specify port manually:
-'''
+
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
-    app.run(host='0.0.0.0', port=port)
-'''
+    app.run(host='192.168.0.101', port=port)
